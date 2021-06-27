@@ -1,0 +1,43 @@
+{% extends "templates/base.twig" %}
+
+{% block title %}
+    MY Website Home
+        
+    
+{% endblock %}
+
+{% block body %}
+    <!DOCTYPE html>
+    <html lang="en">
+        <head>
+            {{ include("templates/headerAdmin.twig", {active: 'addBooks'}) }}
+            <link rel="stylesheet" href="/assets/styles/main.css">
+        </head>
+        <body>
+            <div class="text-center">
+                <div class="form-group">
+                    <form action="/addBooks" method="POST">
+                        <input type="text" name="book_id" placeholder="Book Id">
+                        <br>
+                        <input type="text" name="book_name" placeholder="Book Name">
+                        <br>
+                        <input type="text" name="capacity" placeholder="Copies">
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="Add Book" />
+                    </form>
+                    {% if  status=="exists" %}
+                        <div class="alert alert-danger" role="alert">
+                            book already exists                    
+                        </div>
+                    {% endif %}
+                    {% if  status=="Fields cannot be left empty" %}
+                        <div class="alert alert-danger" role="alert">
+                            Fields cannot be left empty                             
+                        </div>
+                    {% endif %}
+
+                </div>
+            </div>
+        </body>
+    </html>
+{% endblock %}

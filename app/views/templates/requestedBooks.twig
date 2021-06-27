@@ -1,0 +1,78 @@
+{% extends "templates/base.twig" %}
+
+{% block title %}
+  MY Website Home
+  
+{% endblock %}
+
+{% block body %}
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    {{ include("templates/headerAdmin.twig", {active: 'requestedBooks'}) }}
+    <div class="table-data">
+      <h2>
+        Books
+              
+      </h2>
+      <table class="table table-success table-bordered border-dark table-hover">
+        <tr>
+          <th>
+            Book id
+                      
+          </th>
+          <th>
+            Book Name
+                      
+          </th>
+          <th>
+            Number of Copies
+                      
+          </th>
+          <th>
+            Confirm
+                      
+          </th>
+          <th>
+            Reject
+                      
+          </th>
+        </tr>
+
+        {% for book in books %}
+          <tr>
+            <td>
+              {{ book.book_id }}
+            </td>
+            <td>
+              {{ book.book_name }}
+            </td>
+            <td>
+              {{ book.capacity }}
+            </td>
+            <td>
+              <form method="post" action="requestedBooks" class="inline" name=>
+                <input type="hidden" name="action" value="Accept">
+                  <input type="hidden" name="book_id" value={{ book.book_id }}>
+                    <button type="submit" name="submit_param" value="submit_value" class="btn btn-success">
+                      Confirm
+                                                          
+                                          
+                    </button>
+                  </form>
+                </td>
+                <td>
+                  <form method="post" action="requestedBooks" class="inline" name=>
+                    <input type="hidden" name="action" value="Decline">
+                      <input type="hidden" name="book_id" value={{ book.book_id }}>
+                        <button type="submit" name="submit_param" value="submit_value" class="btn btn-danger">
+                          Decline
+                                                                  
+                                                  
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                {% endfor %}
+              {% endblock %}
+              
